@@ -31,6 +31,7 @@ angular.module 'coffeegraph'
       .ticks 3
     
     line = d3.svg.line()
+      .interpolate "monotone"
       .x (d) -> x(d.date)
       .y (d) -> y(d.close)
       
@@ -66,6 +67,26 @@ angular.module 'coffeegraph'
           .datum data
           .attr "class", "line"
           .attr "d", line
+          
+        svg.selectAll "circle"
+          .data data
+          .enter()
+          .append "circle"
+          .attr 'class', 'point'
+          .attr 'cx', (d) -> x(d.date)
+          .attr 'cy', (d) -> y(d.close)
+          .attr 'r', 3
+        svg.append "g"
+          .attr 'class', 'texts'
+          .selectAll 'text'
+          .data data
+          .enter()
+          .append 'text'
+          .attr 'x', (d) -> x(d.date)
+          .attr 'y', (d) -> y(d.close) - 5
+          .attr 'text-anchor', 'middle'
+          .text (d) -> d.close.toFixed(2)
+  
         
     directive =
       restrict: 'E'
