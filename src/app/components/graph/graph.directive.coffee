@@ -59,8 +59,7 @@ angular.module 'coffeegraph'
       
     linkFunc = (scope, el, attr, vm) ->
       svg = d3.select el[0]
-        .append "svg"
-        .classed 'finance-graph', true
+        .select "svg"
         .attr "width", width + margin.left + margin.right
         .attr "height", height + margin.top + margin.bottom
         .append "g"
@@ -122,4 +121,6 @@ angular.module 'coffeegraph'
         
     directive =
       restrict: 'E'
+      transclude: true
+      template: '<svg class="finance-graph"></svg><div class="inside-finance-graph" ng-transclude></div>'
       link: linkFunc
