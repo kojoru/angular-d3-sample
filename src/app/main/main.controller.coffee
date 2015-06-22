@@ -1,3 +1,3 @@
 angular.module "coffeegraph"
-  .controller "MainController", ($timeout, webDevTec, toastr) ->
+  .controller "MainController", ($timeout, toastr) ->
     return

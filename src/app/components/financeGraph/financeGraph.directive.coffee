@@ -1,5 +1,5 @@
 angular.module 'coffeegraph'
-  .directive 'graph', (d3) ->
+  .directive 'financeGraph', (d3) ->
     margin =
       top: 20
       right: 20
