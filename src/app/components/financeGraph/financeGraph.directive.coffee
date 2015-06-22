@@ -9,10 +9,6 @@ angular.module 'coffeegraph'
     width = 400 - margin.left - margin.right
     
     height = 200 - margin.top - margin.bottom
-    
-    parseDate = d3.time
-      .format "%Y-%m-%d"
-      .parse
       
     formatDate = d3.time
       .format '%d.%m'
@@ -65,16 +61,15 @@ angular.module 'coffeegraph'
         .append "g"
         .attr "transform", "translate(" + margin.left + "," + margin.top + ")"
       
-      d3.csv "/assets/data/year.csv", (error, data) ->
-        throw error if error?
-
-        data.forEach (d) ->
-          d.date = parseDate(d.Date)
-          d.close = +d.Close
+      scope.$watch 'graphData', (data) ->
+        return unless data?
 		  
         x.domain [d3.min(data, (d) -> d.date ), d3.max(data, (d) -> d.date )]
         y.domain [Math.floor(d3.min(data, (d) -> d.close )), d3.max(data, (d) -> d.close )]
       
+        svg.selectAll '*'
+          .remove()
+        
         svg.append "g"
           .attr "class", "x grid axis"
           .attr "transform", "translate(0," + height + ")"
@@ -121,6 +116,8 @@ angular.module 'coffeegraph'
         
     directive =
       restrict: 'E'
+      scope: 
+        graphData: '=data'
       transclude: true
       template: '<svg class="finance-graph"></svg><div class="inside-finance-graph" ng-transclude></div>'
       link: linkFunc
