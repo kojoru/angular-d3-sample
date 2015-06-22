@@ -3,23 +3,17 @@
     <h1>Western Union</h1>
     <hr>
     <div class="btn-group">
-      <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'Left'">Week</label>
-      <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'Middle'">Month</label>
-      <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'Right'">Quarter</label>
-      <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'Year'">Year</label>
-      <label class="btn btn-default btn-sm" ng-model="radioModel" btn-radio="'Max'">Max</label>
+      <label ng-repeat="(name, _) in periods" class="btn btn-default btn-sm" ng-class="period == name? 'active' : ''" ng-click="changePeriod(name)">{{ name }}</label>
     </div>
   </div>
   <br>
   <finance-graph data="graphData">
     <div class="btn-group" dropdown is-open="status.isopen">
       <button type="button" class="btn btn-default btn-sm dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-        Price <span class="caret"></span>
+        {{ dataType }} <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Yield</a></li>
-        <li><a href="#">Spread</a></li>
-        <li><a href="#">Price</a></li>
+        <li ng-repeat="(name, _) in dataTypes"><a ng-click="changeDataType(name)">{{ name }}</a></li>
       </ul>
     </div>
   </graph>

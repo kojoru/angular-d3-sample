@@ -116,7 +116,7 @@ angular.module 'coffeegraph'
         
     directive =
       restrict: 'E'
-      scope: 
+      scope:
         graphData: '=data'
       transclude: true
       template: '<svg class="finance-graph"></svg><div class="inside-finance-graph" ng-transclude></div>'

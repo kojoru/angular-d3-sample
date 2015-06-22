@@ -11,13 +11,14 @@ angular.module 'coffeegraph'
       'Open': 'Open'
       'High': 'High'
       'Low': 'Low'
-      'Volume': 'Volume'
     
     parseDate = d3.time
       .format "%Y-%m-%d"
       .parse
     
     dataProvider =
+      periods: files
+      dataTypes: dataTypes
       get: (period, datumName) ->
         deferred = $q.defer()
         d3.csv "/assets/data/"+files[period], (error, data) ->
