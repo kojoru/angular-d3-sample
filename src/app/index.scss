@@ -27,6 +27,16 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
   }
 }
 
+.pre-graph {
+  width: 400px;
+  margin-left: 45px;
+}
+
+graph>*:not(svg) {
+  position: relative;
+  left: 350px;
+  top: -50px;
+}
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

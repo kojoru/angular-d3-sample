@@ -6,13 +6,16 @@ angular.module 'coffeegraph'
       bottom: 30
       left: 50
     
-    width = 960 - margin.left - margin.right
+    width = 400 - margin.left - margin.right
     
-    height = 500 - margin.top - margin.bottom
+    height = 200 - margin.top - margin.bottom
     
     parseDate = d3.time
       .format "%Y-%m-%d"
       .parse
+      
+    formatDate = d3.time
+      .format '%d.%m'
     
     x = d3.time.scale()
       .range [0, width]
@@ -24,11 +27,16 @@ angular.module 'coffeegraph'
       .scale x
       .orient "bottom"
       .ticks 5
+      .tickFormat (d) -> formatDate(d)
+      .innerTickSize 0
+      .outerTickSize 0
     
     yAxis = d3.svg.axis()
       .scale y
       .orient "left"
-      .ticks 4
+      .ticks 3
+      .innerTickSize 0
+      .outerTickSize 0
     
     xGrid = d3.svg.axis()
       .scale x
@@ -39,7 +47,7 @@ angular.module 'coffeegraph'
     
     yGrid = d3.svg.axis()
       .scale y
-      .ticks 4
+      .ticks 3
       .orient 'right'
       .innerTickSize width
       .tickFormat (t) -> ''

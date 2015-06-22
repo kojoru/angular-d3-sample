@@ -1,26 +1,30 @@
 .finance-graph {
   font: 10px sans-serif;
-
     .grid path,
     .grid line {
       fill: none;
-      stroke: #000;
+      stroke: rgba(0,0,0,.2);
       shape-rendering: crispEdges;
     }
     
-    /*.x.axis path {
+    .inner path,
+    .x path {
       display: none;
-    } */
+    } 
     
     .line {
       fill: none;
-      stroke: steelblue;
-      stroke-width: 1.5px;
+      stroke: lightgray;
+      stroke-width: 2px;
     }
     
     .point {
-      fill: steelblue;
-      stroke: steelblue;
-      stroke-width: 1.5px;
+      fill: lightgray;
+      stroke: lightgray;
+      stroke-width: 2px;
+    }
+    
+    text {
+      
     }
 }
