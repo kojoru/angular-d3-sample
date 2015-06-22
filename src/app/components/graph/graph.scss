@@ -1,16 +1,16 @@
 .finance-graph {
   font: 10px sans-serif;
 
-    .axis path,
-    .axis line {
+    .grid path,
+    .grid line {
       fill: none;
       stroke: #000;
       shape-rendering: crispEdges;
     }
     
-    .x.axis path {
+    /*.x.axis path {
       display: none;
-    }
+    } */
     
     .line {
       fill: none;

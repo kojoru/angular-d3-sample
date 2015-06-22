@@ -28,7 +28,21 @@ angular.module 'coffeegraph'
     yAxis = d3.svg.axis()
       .scale y
       .orient "left"
-      .ticks 3
+      .ticks 4
+    
+    xGrid = d3.svg.axis()
+      .scale x
+      .orient 'top'
+      .ticks 5
+      .innerTickSize height
+      .tickFormat (t) -> ''
+    
+    yGrid = d3.svg.axis()
+      .scale y
+      .ticks 4
+      .orient 'right'
+      .innerTickSize width
+      .tickFormat (t) -> ''
     
     line = d3.svg.line()
       .interpolate "monotone"
@@ -51,18 +65,27 @@ angular.module 'coffeegraph'
           d.date = parseDate(d.Date)
           d.close = +d.Close
 		  
-        x.domain d3.extent(data, (d) -> d.date )
-        y.domain d3.extent(data, (d) -> d.close )
+        x.domain [d3.min(data, (d) -> d.date ), d3.max(data, (d) -> d.date )]
+        y.domain [Math.floor(d3.min(data, (d) -> d.close )), d3.max(data, (d) -> d.close )]
       
         svg.append "g"
-          .attr "class", "x axis"
+          .attr "class", "x grid axis"
           .attr "transform", "translate(0," + height + ")"
           .call xAxis
   
         svg.append "g"
-          .attr "class", "y axis"
+          .attr "class", "y grid axis"
           .call yAxis
   
+        svg.append "g"
+          .attr "class", "x grid inner"
+          .attr "transform", "translate(0," + height + ")"
+          .call xGrid
+  
+        svg.append "g"
+          .attr "class", "y grid inner"
+          .call yGrid
+        
         svg.append "path"
           .datum data
           .attr "class", "line"
@@ -76,6 +99,7 @@ angular.module 'coffeegraph'
           .attr 'cx', (d) -> x(d.date)
           .attr 'cy', (d) -> y(d.close)
           .attr 'r', 3
+          
         svg.append "g"
           .attr 'class', 'texts'
           .selectAll 'text'
